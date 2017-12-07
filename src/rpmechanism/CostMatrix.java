@@ -1,4 +1,4 @@
-package rpmechanism;
+ï»¿package rpmechanism;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +10,11 @@ import multilevelfeedback.ClassInfo;
 
 public class CostMatrix {
 
-    static private double[][] costMatrix; // ²âÊÔ³É±¾¾ØÕó
-    private int num; // ²âÊÔ³É±¾¾ØÕó´óĞ¡
-    static private List<ClassInfo> listOfSrc; // ÀàĞÅÏ¢ÁĞ±í
+    static private double[][] costMatrix; // æµ‹è¯•æˆæœ¬çŸ©é˜µ
+    private int num; // æµ‹è¯•æˆæœ¬çŸ©é˜µå¤§å°
+    static private List<ClassInfo> listOfSrc; // ç±»ä¿¡æ¯åˆ—è¡¨
 
-    // ÎªanalyzeÉè¼ÆµÄ¹¹Ôìº¯Êı
+    // ä¸ºanalyzeè®¾è®¡çš„æ„é€ å‡½æ•°
     public CostMatrix() {
         num = Analyzer.getListOfClass().length;
         costMatrix = new double[num][num];
@@ -24,7 +24,7 @@ public class CostMatrix {
         genListOfClassInfo();
     }
 
-    // ÎªloadÉè¼ÆµÄ¹¹Ôìº¯Êı
+    // ä¸ºloadè®¾è®¡çš„æ„é€ å‡½æ•°
     public CostMatrix(int numberOfClasses) {
         num = numberOfClasses;
         costMatrix = new double[num][num];
@@ -98,11 +98,11 @@ public class CostMatrix {
     private List<ClassInfo> genListOfClassInfoForLoad() {
         this.listOfSrc = new ArrayList<ClassInfo>();
         // Log.logInfo("
-        // ÎªLoadÉè¼ÆµÄCostMatrixµÄ¹¹Ôìº¯Êı£¬ĞèÒªgenListOfClassInfoForLoad()");
-        // Log.logInfo(" ¼ÓÔØµÄÀàÁĞ±í");
+        // ä¸ºLoadè®¾è®¡çš„CostMatrixçš„æ„é€ å‡½æ•°ï¼Œéœ€è¦genListOfClassInfoForLoad()");
+        // Log.logInfo(" åŠ è½½çš„ç±»åˆ—è¡¨");
         // Log.logInfoListS(Loader.getListOfClasses());
         for (int i = 0; i <= num - 1; i++) {
-            // Log.logInfo(" ´´½¨ClassInfo¶ÔÏó "+Loader.getListOfClasses().get(i));
+            // Log.logInfo(" åˆ›å»ºClassInfoå¯¹è±¡ "+Loader.getListOfClasses().get(i));
             ClassInfo sourceClass = new ClassInfo(Loader.getListOfClasses().get(i));
             this.listOfSrc.add(sourceClass);
         }

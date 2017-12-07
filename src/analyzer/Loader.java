@@ -1,4 +1,4 @@
-package analyzer;
+ï»¿package analyzer;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,11 +15,11 @@ import log.Log;
 
 public class Loader {
 
-    static private List<String> listOfClasses; // ´ı²âÀàµÄÁĞ±í
-    static private Map<String, String> listOfDepI; // ¼Ì³Ğ¹ØÏµÁĞ±í
-    // ÊôĞÔÒÀÀµÁĞ±í£¬¼ü¡ª¡ªÀàÃû£¬Öµ¡ª¡ª¸ÃÀàÊôĞÔÒÀÀµµÄÆäËûÀà<ÀàÃû£¬ÊôĞÔÒÀÀµÖµ>
+    static private List<String> listOfClasses; // å¾…æµ‹ç±»çš„åˆ—è¡¨
+    static private Map<String, String> listOfDepI; // ç»§æ‰¿å…³ç³»åˆ—è¡¨
+    // å±æ€§ä¾èµ–åˆ—è¡¨ï¼Œé”®â€”â€”ç±»åï¼Œå€¼â€”â€”è¯¥ç±»å±æ€§ä¾èµ–çš„å…¶ä»–ç±»<ç±»åï¼Œå±æ€§ä¾èµ–å€¼>
     static private Map<String, Map<String, Integer>> listOfA;
-    // ·½·¨ÒÀÀµÁĞ±í£¬¼ü¡ª¡ªÀàÃû£¬Öµ¡ª¡ª¸ÃÀàÊôĞÔÒÀÀµµÄÆäËûÀà<ÀàÃû£¬·½·¨ÒÀÀµÖµ>
+    // æ–¹æ³•ä¾èµ–åˆ—è¡¨ï¼Œé”®â€”â€”ç±»åï¼Œå€¼â€”â€”è¯¥ç±»å±æ€§ä¾èµ–çš„å…¶ä»–ç±»<ç±»åï¼Œæ–¹æ³•ä¾èµ–å€¼>
     static private Map<String, Map<String, Integer>> listOfM;
 
     public Loader() {
@@ -31,35 +31,35 @@ public class Loader {
     }
 
     public void load() {
-        // Ñ¡Ôñ´ı¼ÓÔØµÄÎÄ¼ş(ANT\ATM\BCEL\DNS\SPM)
+        // é€‰æ‹©å¾…åŠ è½½çš„æ–‡ä»¶(ANT\ATM\BCEL\DNS\SPM)
         // Scanner input = new Scanner(System.in);
-        // System.out.println("Ñ¡Ôñ´ı¼ÓÔØµÄÎÄ¼ş£º");
+        // System.out.println("é€‰æ‹©å¾…åŠ è½½çš„æ–‡ä»¶ï¼š");
         // String fileName = input.next();
-        // System.out.println("Ñ¡ÔñµÄÎÄ¼şÊÇ"+fileName);
+        // System.out.println("é€‰æ‹©çš„æ–‡ä»¶æ˜¯"+fileName);
 
         String fileName = "ANT";
-        // ¼ÓÔØ(ANT\ATM\BCEL\DNS\SPMÏÂµÄ)classesÎÄ¼ş\inheritedÎÄ¼ş\attributeÎÄ¼ş\methodÎÄ¼ş
-        // Log.logInfo(" ¿ªÊ¼¼ÓÔØÀàÎÄ¼ş ");
+        // åŠ è½½(ANT\ATM\BCEL\DNS\SPMä¸‹çš„)classesæ–‡ä»¶\inheritedæ–‡ä»¶\attributeæ–‡ä»¶\methodæ–‡ä»¶
+        // Log.logInfo(" å¼€å§‹åŠ è½½ç±»æ–‡ä»¶ ");
         loadClasses(fileName);
-        // Log.logInfo(" ¼ÓÔØÀàÎÄ¼şÍê±Ï ");
+        // Log.logInfo(" åŠ è½½ç±»æ–‡ä»¶å®Œæ¯• ");
 
-        // Log.logInfo(" ¿ªÊ¼¼ÓÔØ¼Ì³ĞÎÄ¼ş ");
+        // Log.logInfo(" å¼€å§‹åŠ è½½ç»§æ‰¿æ–‡ä»¶ ");
         loadInherited(fileName);
-        // Log.logInfo(" ¼ÓÔØ¼Ì³ĞÎÄ¼şÍê±Ï ");
+        // Log.logInfo(" åŠ è½½ç»§æ‰¿æ–‡ä»¶å®Œæ¯• ");
         Log.logMapS_S(listOfDepI);
 
-        // Log.logInfo(" ¿ªÊ¼¼ÓÔØÊôĞÔÎÄ¼ş ");
+        // Log.logInfo(" å¼€å§‹åŠ è½½å±æ€§æ–‡ä»¶ ");
         loadAttribute(fileName);
-        // Log.logInfo(" ¼ÓÔØÊôĞÔÎÄ¼şÍê±Ï ");
+        // Log.logInfo(" åŠ è½½å±æ€§æ–‡ä»¶å®Œæ¯• ");
         // Log.logMapS_SI(listOfA);
 
-        // Log.logInfo(" ¿ªÊ¼¼ÓÔØ·½·¨ÎÄ¼ş ");
+        // Log.logInfo(" å¼€å§‹åŠ è½½æ–¹æ³•æ–‡ä»¶ ");
         loadMethod(fileName);
-        // Log.logInfo(" ¼ÓÔØ·½·¨ÎÄ¼şÍê±Ï ");
+        // Log.logInfo(" åŠ è½½æ–¹æ³•æ–‡ä»¶å®Œæ¯• ");
         // Log.logMapS_SI(listOfM);
     }
 
-    // ¶ÁÈ¡classesÎÄ¼ş
+    // è¯»å–classesæ–‡ä»¶
     private void loadClasses(String fileName) {
         String classFileName = System.getProperty("user.dir") + File.separator + "input" + File.separator + "input_"
                 + fileName + File.separator + "classes";
@@ -69,12 +69,12 @@ public class Loader {
             br = new BufferedReader(classFile);
             String line = null;
             do {
-                line = br.readLine(); // Ò»´Î¶ÁÒ»ĞĞ
+                line = br.readLine(); // ä¸€æ¬¡è¯»ä¸€è¡Œ
                 if (line == null)
                     continue;
-                String[] info = line.split("\t"); // ÒÔTab¼üÀ´Çø·Ö
-                int index = Integer.valueOf(info[0]).intValue() - 1; // »ñÈ¡ÀàµÄ±àºÅ£¨Ô´ÎÄ¼ş´Ó1¿ªÊ¼±àºÅ£©
-                String className = info[1]; // »ñÈ¡ÀàµÄÃû³Æ
+                String[] info = line.split("\t"); // ä»¥Tabé”®æ¥åŒºåˆ†
+                int index = Integer.valueOf(info[0]).intValue() - 1; // è·å–ç±»çš„ç¼–å·ï¼ˆæºæ–‡ä»¶ä»1å¼€å§‹ç¼–å·ï¼‰
+                String className = info[1]; // è·å–ç±»çš„åç§°
                 listOfClasses.add(index, className);
             } while (line != null);
         } catch (FileNotFoundException e) {
@@ -84,7 +84,7 @@ public class Loader {
         }
     }
 
-    // ¶ÁÈ¡inheritedÎÄ¼ş
+    // è¯»å–inheritedæ–‡ä»¶
     private void loadInherited(String fileName) {
         String inheriFileName = System.getProperty("user.dir") + File.separator + "input" + File.separator + "input_"
                 + fileName + File.separator + "inherited";
@@ -99,8 +99,8 @@ public class Loader {
                     continue;
                 }
                 String[] info = line.split("\t");
-                String childCName = String.valueOf(Integer.parseInt(info[0]) - 1); // »ñÈ¡×ÓÀàÃû³Æ
-                String ParentCName = String.valueOf(Integer.parseInt(info[1]) - 1); // »ñÈ¡¸¸ÀàÃû³Æ
+                String childCName = String.valueOf(Integer.parseInt(info[0]) - 1); // è·å–å­ç±»åç§°
+                String ParentCName = String.valueOf(Integer.parseInt(info[1]) - 1); // è·å–çˆ¶ç±»åç§°
                 listOfDepI.put(childCName, ParentCName);
             } while (line != null);
         } catch (FileNotFoundException e) {
@@ -110,7 +110,7 @@ public class Loader {
         }
     }
 
-    // ¶ÁÈ¡AttributeÎÄ¼ş
+    // è¯»å–Attributeæ–‡ä»¶
     private void loadAttribute(String fileName) {
         String attrFileName = System.getProperty("user.dir") + File.separator + "input" + File.separator + "input_"
                 + fileName + File.separator + "attribute";
@@ -125,9 +125,9 @@ public class Loader {
                     continue;
                 }
                 String[] info = line.split("\t");
-                String srcClassName = String.valueOf(Integer.parseInt(info[0]) - 1); // Ô´Àà
-                String desClassName = String.valueOf(Integer.parseInt(info[1]) - 1); // Ä¿±êÀà(±»Ô´ÀàÊôĞÔÒÀÀµ)
-                int attrs = Integer.valueOf(info[2]).intValue(); // ÊôĞÔÒÀÀµµÄÖµ
+                String srcClassName = String.valueOf(Integer.parseInt(info[0]) - 1); // æºç±»
+                String desClassName = String.valueOf(Integer.parseInt(info[1]) - 1); // ç›®æ ‡ç±»(è¢«æºç±»å±æ€§ä¾èµ–)
+                int attrs = Integer.valueOf(info[2]).intValue(); // å±æ€§ä¾èµ–çš„å€¼
                 addAttrDeps(srcClassName, desClassName, attrs);
             } while (line != null);
         } catch (FileNotFoundException e) {
@@ -137,7 +137,7 @@ public class Loader {
         }
     }
 
-    // ¶ÁÈ¡MethodÎÄ¼ş
+    // è¯»å–Methodæ–‡ä»¶
     private void loadMethod(String fileName) {
         String methodFileName = System.getProperty("user.dir") + File.separator + "input" + File.separator + "input_"
                 + fileName + File.separator + "method";
@@ -152,9 +152,9 @@ public class Loader {
                     continue;
                 }
                 String[] info = line.split("\t");
-                String srcClassName = String.valueOf(Integer.parseInt(info[0]) - 1); // Ô´Àà
-                String desClassName = String.valueOf(Integer.parseInt(info[1]) - 1); // Ä¿±êÀà(±»Ô´Àà·½·¨ÒÀÀµ)
-                int methods = Integer.valueOf(info[2]).intValue(); // ·½·¨ÒÀÀµµÄÖµ
+                String srcClassName = String.valueOf(Integer.parseInt(info[0]) - 1); // æºç±»
+                String desClassName = String.valueOf(Integer.parseInt(info[1]) - 1); // ç›®æ ‡ç±»(è¢«æºç±»æ–¹æ³•ä¾èµ–)
+                int methods = Integer.valueOf(info[2]).intValue(); // æ–¹æ³•ä¾èµ–çš„å€¼
                 addMethodDeps(srcClassName, desClassName, methods);
             } while (line != null);
         } catch (FileNotFoundException e) {
@@ -165,10 +165,10 @@ public class Loader {
     }
 
     private void addAttrDeps(String srcClassName, String desClassName, int attrs) {
-        // Èç¹ûÊôĞÔÒÀÀµÁĞ±í°üº¬src,²»ĞèÒªÌí¼Ósrc
+        // å¦‚æœå±æ€§ä¾èµ–åˆ—è¡¨åŒ…å«src,ä¸éœ€è¦æ·»åŠ src
         if (listOfA.containsKey(srcClassName)) {
             listOfA.get(srcClassName).put(desClassName, attrs);
-        } else // ËµÃ÷ÊÇµÚÒ»´Î±éÀúµ½srcµÄÊôĞÔÒÀÀµ£¬ĞÂ½¨ÆäÊôĞÔÒÀÀµÁĞ±í
+        } else // è¯´æ˜æ˜¯ç¬¬ä¸€æ¬¡éå†åˆ°srcçš„å±æ€§ä¾èµ–ï¼Œæ–°å»ºå…¶å±æ€§ä¾èµ–åˆ—è¡¨
         {
             Map<String, Integer> srcAttr = new HashMap<String, Integer>();
             srcAttr.put(desClassName, attrs);
@@ -177,10 +177,10 @@ public class Loader {
     }
 
     private void addMethodDeps(String srcClassName, String desClassName, int methods) {
-        // Èç¹û·½·¨ÒÀÀµÁĞ±í°üº¬src£¬²»ĞèÒªÌí¼Ósrc
+        // å¦‚æœæ–¹æ³•ä¾èµ–åˆ—è¡¨åŒ…å«srcï¼Œä¸éœ€è¦æ·»åŠ src
         if (listOfM.containsKey(srcClassName)) {
             listOfM.get(srcClassName).put(desClassName, methods);
-        } else // ËµÃ÷ÊÇµÚÒ»´Î±éÀúµ½srcµÄ·½·¨ÒÀÀµ£¬ĞÂ½¨Æä·½·¨ÒÀÀµÁĞ±í
+        } else // è¯´æ˜æ˜¯ç¬¬ä¸€æ¬¡éå†åˆ°srcçš„æ–¹æ³•ä¾èµ–ï¼Œæ–°å»ºå…¶æ–¹æ³•ä¾èµ–åˆ—è¡¨
         {
             Map<String, Integer> srcMethod = new HashMap<String, Integer>();
             srcMethod.put(desClassName, methods);

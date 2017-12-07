@@ -1,4 +1,4 @@
-package log;
+ï»¿package log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,53 +8,53 @@ import multilevelfeedback.ClassInfo;
 
 public class Log {
 
-    // ÔËĞĞÕı³£
+    // è¿è¡Œæ­£å¸¸
     public static void logNormal(String s) {
         logTime();
         System.out.println(s);
         System.out.flush();
     }
 
-    // µ÷ÊÔ
+    // è°ƒè¯•
     public static void logDebug(String s) {
         logTime();
         System.err.println(" DEBUG - " + s);
         System.out.flush();
     }
 
-    // ³öÏÖ´íÎó
+    // å‡ºç°é”™è¯¯
     public static void logError(String s) {
         logTime();
         System.err.println(" ERROR - " + s);
         System.out.flush();
     }
 
-    // Êä³öĞÅÏ¢
+    // è¾“å‡ºä¿¡æ¯
     public static void logInfo(String s) {
         logTime();
         System.out.println(" INFO - " + s);
         System.out.flush();
     }
 
-    // Êä³öµ±Ç°Ê±¼ä
+    // è¾“å‡ºå½“å‰æ—¶é—´
     private static void logTime() {
         System.out.print(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
     }
 
-    // Êä³ö Map<String, Integer> ÁĞ±í
+    // è¾“å‡º Map<String, Integer> åˆ—è¡¨
     public static void logInfoMapSI(Map<String, Integer> MapSI) {
         if (MapSI != null) {
             for (Map.Entry<String, Integer> entry : MapSI.entrySet()) {
                 System.out.println(entry.getKey() + "---->" + entry.getValue());
             }
         } else
-            System.out.println("´Ë¼¯ºÏÎª¿Õ");
+            System.out.println("æ­¤é›†åˆä¸ºç©º");
     }
 
-    // Êä³öMap<String, Map<String, Integer>>ÁĞ±í
+    // è¾“å‡ºMap<String, Map<String, Integer>>åˆ—è¡¨
     public static void logMapS_SI(Map<String, Map<String, Integer>> MapS_SI) {
         for (Map.Entry<String, Map<String, Integer>> entry : MapS_SI.entrySet()) {
-            System.out.println("  " + entry.getKey() + " ¸Ã´ı²âÀàµÄÊôĞÔ/·½·¨ÒÀÀµÁĞ±íÎª  ");
+            System.out.println("  " + entry.getKey() + " è¯¥å¾…æµ‹ç±»çš„å±æ€§/æ–¹æ³•ä¾èµ–åˆ—è¡¨ä¸º  ");
             Map<String, Integer> map = entry.getValue();
             for (Map.Entry<String, Integer> entry2 : map.entrySet()) {
                 System.out.println(entry2.getKey() + "---->" + entry2.getValue());
@@ -63,7 +63,7 @@ public class Log {
 
     }
 
-    // Êä³öList<String>ÁĞ±í
+    // è¾“å‡ºList<String>åˆ—è¡¨
     public static void logInfoListS(List<String> listOfClasses) {
         for (int i = 0; i <= listOfClasses.size() - 1; i++) {
             Log.logInfo(i + "-->" + listOfClasses.get(i));
@@ -71,24 +71,24 @@ public class Log {
 
     }
 
-    // Êä³öMap<String, String>ÁĞ±í
+    // è¾“å‡ºMap<String, String>åˆ—è¡¨
     public static void logMapS_S(Map<String, String> listOfDepI) {
         for (Map.Entry<String, String> entry : listOfDepI.entrySet()) {
             System.out.println(entry.getKey() + "---->" + entry.getValue());
         }
     }
 
-    // Êä³öClassInfo ¶ÔÏóµÄ¾ßÌåÄÚÈİ
+    // è¾“å‡ºClassInfo å¯¹è±¡çš„å…·ä½“å†…å®¹
     public static void logCI(ClassInfo sourceClass) {
-        Log.logInfo(" ĞÂ½¨µÄClassInfoµÄÃû³Æ   " + sourceClass.getName());
-        Log.logInfo(" ĞÂ½¨µÄClassInfoµÄ±àºÅ   " + sourceClass.getNo());
-        Log.logInfo(" ĞÂ½¨µÄClassInfoµÄ¸¸Àà   " + sourceClass.getParent());
-        Log.logInfo("  ¸ÃÀà" + sourceClass.getName() + "ÓëÆäËûÀàµÄÊôĞÔÒÀÀµÊıÄ¿¼¯ºÏ");
+        Log.logInfo(" æ–°å»ºçš„ClassInfoçš„åç§°   " + sourceClass.getName());
+        Log.logInfo(" æ–°å»ºçš„ClassInfoçš„ç¼–å·   " + sourceClass.getNo());
+        Log.logInfo(" æ–°å»ºçš„ClassInfoçš„çˆ¶ç±»   " + sourceClass.getParent());
+        Log.logInfo("  è¯¥ç±»" + sourceClass.getName() + "ä¸å…¶ä»–ç±»çš„å±æ€§ä¾èµ–æ•°ç›®é›†åˆ");
         Log.logInfoMapSI(sourceClass.getAttrDeps());
-        Log.logInfo("  ¸ÃÀà" + sourceClass.getName() + "ÓëÆäËûÀàµÄ·½·¨ÒÀÀµÊıÄ¿¼¯ºÏ");
+        Log.logInfo("  è¯¥ç±»" + sourceClass.getName() + "ä¸å…¶ä»–ç±»çš„æ–¹æ³•ä¾èµ–æ•°ç›®é›†åˆ");
         Log.logInfoMapSI(sourceClass.getMethodDeps());
-        Log.logInfo("  ¸ÃÀàµÄÊôĞÔÒÀÀµ×î´óÖµÎª --->" + sourceClass.getMaxAttrDep());
-        Log.logInfo("  ¸ÃÀàµÄ·½·¨ÒÀÀµ×î´óÖµÎª --->" + sourceClass.getMaxMethodDep());
+        Log.logInfo("  è¯¥ç±»çš„å±æ€§ä¾èµ–æœ€å¤§å€¼ä¸º --->" + sourceClass.getMaxAttrDep());
+        Log.logInfo("  è¯¥ç±»çš„æ–¹æ³•ä¾èµ–æœ€å¤§å€¼ä¸º --->" + sourceClass.getMaxMethodDep());
 
     }
 }

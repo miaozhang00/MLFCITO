@@ -1,4 +1,4 @@
-package multilevelfeedback;
+ï»¿package multilevelfeedback;
 
 import java.util.List;
 import java.util.Map;
@@ -11,28 +11,28 @@ import analyzer.Loader;
 import soot.SootClass;
 
 public class ClassInfo {
-    private int no; // ¸ÃÀàµÄ±àºÅ
-    private SootClass sClass; // ¸ÃÀà
-    private String sCName; // ¸ÃÀàÃû³Æ
-    private Map<String, Integer> attrDeps; // ÓëÆäËûÀàÊôĞÔÒÀÀµÊıÄ¿¼¯ºÏ
-    private Map<String, Integer> methodDeps; // ÓëÆäËûÀà·½·¨ÒÀÀµÊıÄ¿¼¯ºÏ
-    private String parentCName; // ¸ÃÀàµÄ¸¸Àà
-    private int maxAttrDep; // ÊôĞÔÒÀÀµÊıÄ¿×î´óÖµ
-    private int maxMethodDep; // ·½·¨ÒÀÀµÊıÄ¿×î´óÖµ
+    private int no; // è¯¥ç±»çš„ç¼–å·
+    private SootClass sClass; // è¯¥ç±»
+    private String sCName; // è¯¥ç±»åç§°
+    private Map<String, Integer> attrDeps; // ä¸å…¶ä»–ç±»å±æ€§ä¾èµ–æ•°ç›®é›†åˆ
+    private Map<String, Integer> methodDeps; // ä¸å…¶ä»–ç±»æ–¹æ³•ä¾èµ–æ•°ç›®é›†åˆ
+    private String parentCName; // è¯¥ç±»çš„çˆ¶ç±»
+    private int maxAttrDep; // å±æ€§ä¾èµ–æ•°ç›®æœ€å¤§å€¼
+    private int maxMethodDep; // æ–¹æ³•ä¾èµ–æ•°ç›®æœ€å¤§å€¼
 
-    // ÎªLoadĞ´µÄ¹¹Ôì·½·¨£¬ÓÃÓÚ´æ´¢loadµÄ½á¹û
+    // ä¸ºLoadå†™çš„æ„é€ æ–¹æ³•ï¼Œç”¨äºå­˜å‚¨loadçš„ç»“æœ
     public ClassInfo(String sCName) {
         this.sCName = sCName;
         this.no = Loader.getIndex(this.sCName);
         genAttrDepsforLoad();
         genMethodDepsforLoad();
-        Log.logInfo("  ²éÕÒ¸¸Àà");
+        Log.logInfo("  æŸ¥æ‰¾çˆ¶ç±»");
         getParentClassforLoad();
         setMaxAttrDep();
         setMaxMethodDep();
     }
 
-    // ÎªAnalyzeĞ´µÄ¹¹Ôì·½·¨£¬ÓÃÓÚ´æ´¢analyzeµÄ½á¹û
+    // ä¸ºAnalyzeå†™çš„æ„é€ æ–¹æ³•ï¼Œç”¨äºå­˜å‚¨analyzeçš„ç»“æœ
     public ClassInfo(SootClass sClass) {
         this.sClass = sClass;
         this.sCName = sClass.getName();
@@ -46,9 +46,9 @@ public class ClassInfo {
 
     private void genAttrDepsforLoad() {
         // Log.logInfo(" ClassInfo-->genAttrDepsforLoad()");
-        // ÅĞ¶Ï¸ÃÀàÊÇ·ñÍ¬ÆäËûÀàÓĞÊôĞÔÒÀÀµ
+        // åˆ¤æ–­è¯¥ç±»æ˜¯å¦åŒå…¶ä»–ç±»æœ‰å±æ€§ä¾èµ–
         if (Loader.getListOfA().containsKey(String.valueOf(this.no))) {
-            // »ñÈ¡ÓëÆäËûÀàÊôĞÔÒÀÀµÊıÄ¿¼¯ºÏ
+            // è·å–ä¸å…¶ä»–ç±»å±æ€§ä¾èµ–æ•°ç›®é›†åˆ
             this.attrDeps = Loader.getListOfA().get(String.valueOf(this.no));
         } else
             this.attrDeps = null;
@@ -56,9 +56,9 @@ public class ClassInfo {
 
     private void genMethodDepsforLoad() {
         // Log.logInfo(" ClassInfo -->genMethodDepsforLoad()");
-        // ÅĞ¶Ï¸ÃÀàÊÇ·ñÍ¬ÆäËûÀàÓĞ·½·¨ÒÀÀµ
+        // åˆ¤æ–­è¯¥ç±»æ˜¯å¦åŒå…¶ä»–ç±»æœ‰æ–¹æ³•ä¾èµ–
         if (Loader.getListOfM().containsKey(String.valueOf(this.no))) {
-            // »ñÈ¡ÓëÆäËûÀà·½·¨ÒÀÀµÊıÄ¿¼¯ºÏ
+            // è·å–ä¸å…¶ä»–ç±»æ–¹æ³•ä¾èµ–æ•°ç›®é›†åˆ
             this.methodDeps = Loader.getListOfM().get(String.valueOf(this.no));
         } else
             this.methodDeps = null;
@@ -66,9 +66,9 @@ public class ClassInfo {
 
     private void getParentClassforLoad() {
         if (Loader.getListOfDepI() != null) {
-            Log.logInfo("Ö´ĞĞÉú³É¸¸Àà·½·¨");
-            Log.logInfo(" ¸ÃÀàµÄ±àºÅÎª  " + this.no);
-            Log.logInfo(" ¸ÃÀàµÄ¸¸ÀàÎª  " + Loader.getListOfDepI().get(this.no));
+            Log.logInfo("æ‰§è¡Œç”Ÿæˆçˆ¶ç±»æ–¹æ³•");
+            Log.logInfo(" è¯¥ç±»çš„ç¼–å·ä¸º  " + this.no);
+            Log.logInfo(" è¯¥ç±»çš„çˆ¶ç±»ä¸º  " + Loader.getListOfDepI().get(this.no));
             if (Loader.getListOfDepI().containsKey(this.no)) {
 
                 this.parentCName = Loader.getListOfDepI().get(this.no);
@@ -157,7 +157,7 @@ public class ClassInfo {
         return maxMethodDep;
     }
 
-    // ÅĞ¶ÏÊÇ·ñÒÀÀµÀàdes
+    // åˆ¤æ–­æ˜¯å¦ä¾èµ–ç±»des
     public boolean isDepend(int desNo) {
         String desCName = String.valueOf(desNo);
         boolean depend = false;
@@ -185,7 +185,7 @@ public class ClassInfo {
         return depend;
     }
 
-    // ÅĞ¶ÏÊÇ·ñ±»ÀàsrcÒÀÀµ
+    // åˆ¤æ–­æ˜¯å¦è¢«ç±»srcä¾èµ–
     public boolean isDependBy(ClassInfo srClass) {
         boolean dependby = false;
 
@@ -196,7 +196,7 @@ public class ClassInfo {
         return dependby;
     }
 
-    // ÅĞ¶ÏÊÇ·ñ¼Ì³ĞÓÚdes
+    // åˆ¤æ–­æ˜¯å¦ç»§æ‰¿äºdes
     public boolean isInherited(int desNo) {
         if (this.parentCName == String.valueOf(desNo))
             return true;
@@ -204,7 +204,7 @@ public class ClassInfo {
             return false;
     }
 
-    // Í³¼ÆÍ¬Ààdes¼äµÄÊôĞÔÒÀÀµÊıÄ¿
+    // ç»Ÿè®¡åŒç±»desé—´çš„å±æ€§ä¾èµ–æ•°ç›®
     public int getNumOfAttr(int desNo) {
         String desCName = String.valueOf(desNo);
         if (attrDeps != null) {
@@ -216,7 +216,7 @@ public class ClassInfo {
             return 0;
     }
 
-    // Í³¼ÆÍ¬Ààdes¼äµÄ·½·¨µ÷ÓÃÊıÄ¿
+    // ç»Ÿè®¡åŒç±»desé—´çš„æ–¹æ³•è°ƒç”¨æ•°ç›®
     public int getNumOfMethod(int desNo) {
         String desCName = String.valueOf(desNo);
         if (methodDeps != null) {
@@ -228,17 +228,17 @@ public class ClassInfo {
             return 0;
     }
 
-    // »ñÈ¡ÀàµÄÃû³Æ
+    // è·å–ç±»çš„åç§°
     public String getName() {
         return this.sCName;
     }
 
-    // »ñÈ¡ÀàµÄ±àºÅ
+    // è·å–ç±»çš„ç¼–å·
     public int getNo() {
         return this.no;
     }
 
-    // »ñÈ¡ÀàµÄ¸¸Àà
+    // è·å–ç±»çš„çˆ¶ç±»
     public String getParent() {
         return this.parentCName;
     }

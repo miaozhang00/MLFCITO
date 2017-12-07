@@ -1,4 +1,4 @@
-package manager;
+ï»¿package manager;
 
 import multilevelfeedback.MultiLevelFeedback;
 import analyzer.Analyzer;
@@ -8,11 +8,11 @@ import rpmechanism.CostMatrix;
 
 public class Manager {
 
-    Loader loader; // ¼ÓÔØÊäÈëÎÄµµÀà
-    Analyzer analyzer; // ³ÌĞò·ÖÎöÀà
-    CostMatrix costMatrix; // ²âÊÔ³É±¾¾ØÕó
-    TestPriority testPriority; // ²âÊÔÓÅÏÈ¼¶ÁĞ±í
-    MultiLevelFeedback multiLevelFeedback; // ¶à¼¶·´À¡
+    Loader loader; // åŠ è½½è¾“å…¥æ–‡æ¡£ç±»
+    Analyzer analyzer; // ç¨‹åºåˆ†æç±»
+    CostMatrix costMatrix; // æµ‹è¯•æˆæœ¬çŸ©é˜µ
+    TestPriority testPriority; // æµ‹è¯•ä¼˜å…ˆçº§åˆ—è¡¨
+    MultiLevelFeedback multiLevelFeedback; // å¤šçº§åé¦ˆ
 
     public Manager() {
         this.loader = new Loader();

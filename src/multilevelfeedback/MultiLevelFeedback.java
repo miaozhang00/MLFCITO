@@ -1,4 +1,4 @@
-package multilevelfeedback;
+ï»¿package multilevelfeedback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,9 @@ import rpmechanism.TestProfit;
 
 public class MultiLevelFeedback {
 
-    private int num; // ´ı²âÏµÍ³µÄÀàµÄÊıÄ¿
-    private TestProfit testProfit; // ²âÊÔÊÕÒæÀà£¬ÓÃÓÚ¼ÆËã¸üĞÂ²âÊÔÊÕÒæ
-    private TestPriority testPriority; // ²âÊÔÓÅÏÈ¼¶
+    private int num; // å¾…æµ‹ç³»ç»Ÿçš„ç±»çš„æ•°ç›®
+    private TestProfit testProfit; // æµ‹è¯•æ”¶ç›Šç±»ï¼Œç”¨äºè®¡ç®—æ›´æ–°æµ‹è¯•æ”¶ç›Š
+    private TestPriority testPriority; // æµ‹è¯•ä¼˜å…ˆçº§
 
     public MultiLevelFeedback() {
         this.testProfit = new TestProfit();
@@ -18,10 +18,10 @@ public class MultiLevelFeedback {
     }
 
     public void process(TestPriority testPriority) {
-        // ¼ÆËãÃ¿¸öÀàµÄ²âÊÔÊÕÒæ
-        // Ñ¡ÔñÀà·ÅÈëÀà¼¯³É²âÊÔĞòÁĞ£¨²âÊÔÊÕÒæ×î´ó¡¢²âÊÔ³É±¾Îª0£©
-        // ¸ü¸Ä²âÊÔÊÕÒæÖµ¡¢²âÊÔÓÅÏÈ¼¶¡¢²âÊÔ³É±¾
-        // ÖØ¸´ÉÏÊö¹ı³Ì£¬Ö±µ½ÅÅĞòÍê±Ï
+        // è®¡ç®—æ¯ä¸ªç±»çš„æµ‹è¯•æ”¶ç›Š
+        // é€‰æ‹©ç±»æ”¾å…¥ç±»é›†æˆæµ‹è¯•åºåˆ—ï¼ˆæµ‹è¯•æ”¶ç›Šæœ€å¤§ã€æµ‹è¯•æˆæœ¬ä¸º0ï¼‰
+        // æ›´æ”¹æµ‹è¯•æ”¶ç›Šå€¼ã€æµ‹è¯•ä¼˜å…ˆçº§ã€æµ‹è¯•æˆæœ¬
+        // é‡å¤ä¸Šè¿°è¿‡ç¨‹ï¼Œç›´åˆ°æ’åºå®Œæ¯•
         List<String> lastOrderedClass = new ArrayList<String>();
         this.testPriority = testPriority;
         this.num = testPriority.num();

@@ -1,4 +1,4 @@
-package analyzer;
+ï»¿package analyzer;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,16 +25,16 @@ import soot.jimple.internal.JVirtualInvokeExpr;
 
 public class Analyzer {
 
-    static private Collection<SootClass> listOfClasses; // ´ı²âÀàµÄÁĞ±í
-    static private Map<String, String> listOfDepI; // ¼Ì³Ğ¹ØÏµÁĞ±í
-    static private Map<String, List<String>> listOfM; // ·½·¨ÒÀÀµÁĞ±í
-    static private Map<String, List<String>> listOfA; // ÊôĞÔÒÀÀµÁĞ±í
-    static private Map<String, String> listOfMI; // ·½·¨µ÷ÓÃÁĞ±í£¨ÓÃÓÚ·½·¨Èı£©
+    static private Collection<SootClass> listOfClasses; // å¾…æµ‹ç±»çš„åˆ—è¡¨
+    static private Map<String, String> listOfDepI; // ç»§æ‰¿å…³ç³»åˆ—è¡¨
+    static private Map<String, List<String>> listOfM; // æ–¹æ³•ä¾èµ–åˆ—è¡¨
+    static private Map<String, List<String>> listOfA; // å±æ€§ä¾èµ–åˆ—è¡¨
+    static private Map<String, String> listOfMI; // æ–¹æ³•è°ƒç”¨åˆ—è¡¨ï¼ˆç”¨äºæ–¹æ³•ä¸‰ï¼‰
 
     public void analysis() throws Exception {
 
-        loadClassAndAnalysis(); // ¼ÓÔØÀà²¢·ÖÎö
-        listOfClasses = Scene.v().getApplicationClasses(); // »ñÈ¡ËùÓĞµÄ´ı²âÀà
+        loadClassAndAnalysis(); // åŠ è½½ç±»å¹¶åˆ†æ
+        listOfClasses = Scene.v().getApplicationClasses(); // è·å–æ‰€æœ‰çš„å¾…æµ‹ç±»
         findDepI(listOfClasses);
         for (SootClass sClass : listOfClasses) {
             analysisMethod(sClass);
@@ -53,7 +53,7 @@ public class Analyzer {
         }
     }
 
-    // ²éÕÒËùÓĞµÄ¼Ì³Ğ¹ØÏµ
+    // æŸ¥æ‰¾æ‰€æœ‰çš„ç»§æ‰¿å…³ç³»
     public Map<String, String> findDepI(Collection<SootClass> scs) {
         for (SootClass childClass : scs) {
             SootClass superClass = childClass.getSuperclass();
@@ -64,13 +64,13 @@ public class Analyzer {
         return listOfDepI;
     }
 
-    // ·ÖÎö·½·¨ÒÀÀµ
+    // åˆ†ææ–¹æ³•ä¾èµ–
     private void analysisMethod(SootClass sClass) {
-        // ±£´æËùÓĞ·½·¨µÄinvokeM
+        // ä¿å­˜æ‰€æœ‰æ–¹æ³•çš„invokeM
         List<String> allInvokeM = new ArrayList<String>();
-        // »ñÈ¡sClassµÄËùÓĞ·½·¨
+        // è·å–sClassçš„æ‰€æœ‰æ–¹æ³•
         Collection<SootMethod> listOfm = sClass.getMethods();
-        // ·ÖÎösClassµÄÃ¿¸ö·½·¨ÊÇ·ñµ÷ÓÃÁËÆäËûÀàµÄ·½·¨
+        // åˆ†æsClassçš„æ¯ä¸ªæ–¹æ³•æ˜¯å¦è°ƒç”¨äº†å…¶ä»–ç±»çš„æ–¹æ³•
         for (SootMethod m : listOfm) {
             if (!m.isConcrete()) {
                 allInvokeM.addAll(analysismethod(sClass, m));
@@ -79,29 +79,29 @@ public class Analyzer {
         listOfM.put(sClass.getName(), allInvokeM);
     }
 
-    // ·ÖÎöÊôĞÔÒÀÀµ
+    // åˆ†æå±æ€§ä¾èµ–
     private void analysisAttr(SootClass sClass) {
-        // ±£´æËùÓĞµÄAccessA
+        // ä¿å­˜æ‰€æœ‰çš„AccessA
         List<String> allAccessA = new ArrayList<String>();
-        // Ôö¼ÓFieldÖĞµÄÊôĞÔÒÀÀµ
+        // å¢åŠ Fieldä¸­çš„å±æ€§ä¾èµ–
         allAccessA.addAll(analysisField(sClass));
-        // Ôö¼Ó²ÎÊıµ÷ÓÃµÄÊôĞÔÒÀÀµ
+        // å¢åŠ å‚æ•°è°ƒç”¨çš„å±æ€§ä¾èµ–
         allAccessA.addAll(analysisPara(sClass));
-        // Ôö¼Ó·µ»ØÖµµ÷ÓÃµÄÊôĞÔÒÀÀµ
+        // å¢åŠ è¿”å›å€¼è°ƒç”¨çš„å±æ€§ä¾èµ–
         allAccessA.addAll(analysisRet(sClass));
         listOfA.put(sClass.getName(), allAccessA);
     }
 
-    // ·ÖÎöÀàµÄÄ³Ò»·½·¨¶ÔÆäËûÀà·½·¨µÄÒÀÀµ
+    // åˆ†æç±»çš„æŸä¸€æ–¹æ³•å¯¹å…¶ä»–ç±»æ–¹æ³•çš„ä¾èµ–
     private List<String> analysismethod(SootClass sClass, SootMethod sMethod) {
-        // invokeM´æ´¢sMethod·½·¨ÒÀÀµµÄÀàµÄÁĞ±í
+        // invokeMå­˜å‚¨sMethodæ–¹æ³•ä¾èµ–çš„ç±»çš„åˆ—è¡¨
         List<String> invokeM = new ArrayList<String>();
         Body body = sMethod.retrieveActiveBody();
         Collection<Unit> units = body.getUnits();
         for (Unit unit : units) {
             for (ValueBox valueBox : unit.getUseBoxes()) {
                 Value useValue = valueBox.getValue();
-                // ÅĞ¶ÏuseValueÊÇ²»ÊÇµ÷ÓÃÓï¾ä
+                // åˆ¤æ–­useValueæ˜¯ä¸æ˜¯è°ƒç”¨è¯­å¥
                 switch (isInvokeExpr(useValue)) {
                 case 1:
                     invokeM.addAll(analysisVirtualInvoke(useValue, sClass, sMethod));
@@ -121,7 +121,7 @@ public class Analyzer {
         return invokeM;
     }
 
-    // ÅĞ¶ÏuseValueÊÇÄÄÖÖµ÷ÓÃÓï¾ä
+    // åˆ¤æ–­useValueæ˜¯å“ªç§è°ƒç”¨è¯­å¥
     private int isInvokeExpr(Value useValue) {
         int no = 0;
         if (useValue instanceof JVirtualInvokeExpr)
@@ -137,7 +137,7 @@ public class Analyzer {
         return no;
     }
 
-    // ·ÖÎöVirtualInvoke£¬·µ»ØvirtualInvokeµ÷ÓÃĞÅÏ¢ÁĞ±í¡ª¡ªvInvokeM
+    // åˆ†æVirtualInvokeï¼Œè¿”å›virtualInvokeè°ƒç”¨ä¿¡æ¯åˆ—è¡¨â€”â€”vInvokeM
     private List<String> analysisVirtualInvoke(Value useValue, SootClass sClass, SootMethod sMethod) {
         List<String> vInvokeM = new ArrayList<String>();
         JVirtualInvokeExpr jVirtualInvokeExpr = (JVirtualInvokeExpr) useValue;
@@ -155,7 +155,7 @@ public class Analyzer {
         return vInvokeM;
     }
 
-    // ·ÖÎöInterfaceInvoke£¬·µ»ØInterfaceInvokeµ÷ÓÃĞÅÏ¢ÁĞ±í¡ª¡ªiInvokeM
+    // åˆ†æInterfaceInvokeï¼Œè¿”å›InterfaceInvokeè°ƒç”¨ä¿¡æ¯åˆ—è¡¨â€”â€”iInvokeM
     private List<String> analysisInterInvoke(Value useValue, SootClass sClass, SootMethod sMethod) {
         List<String> iInvokeM = new ArrayList<String>();
         JInterfaceInvokeExpr jInterInvokeExpr = (JInterfaceInvokeExpr) useValue;
@@ -173,7 +173,7 @@ public class Analyzer {
         return iInvokeM;
     }
 
-    // ·ÖÎöDynamicInvoke£¬·µ»ØdynamicInvokeµ÷ÓÃĞÅÏ¢ÁĞ±í¡ª¡ªdInvokeM
+    // åˆ†æDynamicInvokeï¼Œè¿”å›dynamicInvokeè°ƒç”¨ä¿¡æ¯åˆ—è¡¨â€”â€”dInvokeM
     private List<String> analysisDynamInvoke(Value useValue, SootClass sClass, SootMethod sMethod) {
         List<String> dInvokeM = new ArrayList<String>();
         JDynamicInvokeExpr jDynamInvokeExpr = (JDynamicInvokeExpr) useValue;
@@ -191,7 +191,7 @@ public class Analyzer {
         return dInvokeM;
     }
 
-    // ·ÖÎöSpecialInvoke£¬·µ»ØSpecialInvokeµ÷ÓÃÁĞ±í¡ª¡ªsInvokeM
+    // åˆ†æSpecialInvokeï¼Œè¿”å›SpecialInvokeè°ƒç”¨åˆ—è¡¨â€”â€”sInvokeM
     private List<String> analysisSpecInvoke(Value useValue, SootClass sClass, SootMethod sMethod) {
         List<String> sInvokeM = new ArrayList<String>();
         JSpecialInvokeExpr jSpecInvokeExpr = (JSpecialInvokeExpr) useValue;
@@ -209,7 +209,7 @@ public class Analyzer {
         return sInvokeM;
     }
 
-    // ·ÖÎöStaticInvoke£¬·µ»ØstaticInvokeµ÷ÓÃĞÅÏ¢ÁĞ±í¡ª¡ªstInvokeM
+    // åˆ†æStaticInvokeï¼Œè¿”å›staticInvokeè°ƒç”¨ä¿¡æ¯åˆ—è¡¨â€”â€”stInvokeM
     private List<String> analysisStatInvoke(Value useValue, SootClass sClass, SootMethod sMethod) {
         List<String> stInvokeM = new ArrayList<String>();
         JStaticInvokeExpr jStatInvokeExpr = (JStaticInvokeExpr) useValue;
@@ -245,12 +245,12 @@ public class Analyzer {
 
     private List<String> analysisPara(SootClass sClass) {
         List<String> accessPara = new ArrayList<String>();
-        // »ñÈ¡sClassµÄËùÓĞ·½·¨
+        // è·å–sClassçš„æ‰€æœ‰æ–¹æ³•
         Collection<SootMethod> listOfm = sClass.getMethods();
-        // ·ÖÎösClassµÄÃ¿¸ö·½·¨µÄ²ÎÊıµ÷ÓÃ
+        // åˆ†æsClassçš„æ¯ä¸ªæ–¹æ³•çš„å‚æ•°è°ƒç”¨
         for (SootMethod m : listOfm) {
             if (!m.isConcrete()) {
-                // ·ÖÎö·½·¨mÖĞµÄ²ÎÊıµ÷ÓÃ
+                // åˆ†ææ–¹æ³•mä¸­çš„å‚æ•°è°ƒç”¨
                 accessPara.addAll(analysisParainM(sClass, m));
             }
         }
@@ -259,9 +259,9 @@ public class Analyzer {
 
     private List<String> analysisRet(SootClass sClass) {
         List<String> accessRet = new ArrayList<String>();
-        // »ñÈ¡sClassµÄËùÓĞ·½·¨
+        // è·å–sClassçš„æ‰€æœ‰æ–¹æ³•
         Collection<SootMethod> listOfm = sClass.getMethods();
-        // ·ÖÎösClassµÄÃ¿¸ö·½·¨µÄ·µ»ØÖµµ÷ÓÃ
+        // åˆ†æsClassçš„æ¯ä¸ªæ–¹æ³•çš„è¿”å›å€¼è°ƒç”¨
         for (SootMethod m : listOfm) {
             Type retType = m.getReturnType();
             for (SootClass sc : listOfClasses) {
@@ -330,25 +330,25 @@ public class Analyzer {
         return listOfMI;
     };
 
-    // 1.²âÊÔanalysis()
+    // 1.æµ‹è¯•analysis()
     public void TC_analysis() {
-        // Í³¼Æ´ı²âÏµÍ³¹²ÓĞ¶àÉÙ¸öÀà
-        System.out.println("¸Ã´ı²âÏµÍ³¹²ÓĞ" + listOfClasses.size() + "¸öÀà");
-        // Êä³ö´ı²âÀàµÄÃû³Æ
+        // ç»Ÿè®¡å¾…æµ‹ç³»ç»Ÿå…±æœ‰å¤šå°‘ä¸ªç±»
+        System.out.println("è¯¥å¾…æµ‹ç³»ç»Ÿå…±æœ‰" + listOfClasses.size() + "ä¸ªç±»");
+        // è¾“å‡ºå¾…æµ‹ç±»çš„åç§°
         for (SootClass sootClass : Scene.v().getApplicationClasses()) {
             String className = sootClass.getName();
-            System.out.println("·ÖÎöÀà" + className);
+            System.out.println("åˆ†æç±»" + className);
         }
     }
 
-    // TestCode:Êä³ö¼Ì³Ğ¹ØÏµÁĞ±ílistOfDepI
+    // TestCode:è¾“å‡ºç»§æ‰¿å…³ç³»åˆ—è¡¨listOfDepI
     public static void TC_DepI(Map<String, String> DepI) {
         Set<String> keySet = DepI.keySet();
         for (String childCName : keySet) {
             String superCName = DepI.get(childCName);
-            System.out.println("×Ó´ú" + childCName + "¼Ì³ĞÓÚ" + superCName);
+            System.out.println("å­ä»£" + childCName + "ç»§æ‰¿äº" + superCName);
         }
-        System.out.println("¹²¼Æ" + DepI.size() + "¸ö¼Ì³Ğ¹ØÏµ");
+        System.out.println("å…±è®¡" + DepI.size() + "ä¸ªç»§æ‰¿å…³ç³»");
     }
 
 }

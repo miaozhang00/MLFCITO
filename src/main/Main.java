@@ -1,4 +1,4 @@
-package main;
+ï»¿package main;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -13,14 +13,14 @@ public class Main {
     public static void main(String[] args) throws Exception {
         String inputDirectory = System.getProperty("user.dir") + File.separator + "input";
         String outputDirectory = System.getProperty("user.dir") + File.separator + "output";
-        // Ñ¡Ôñ¼ÓÔØÄ£Ê½»ò·ÖÎöÄ£Ê½
+        // é€‰æ‹©åŠ è½½æ¨¡å¼æˆ–åˆ†ææ¨¡å¼
         // Scanner input = new Scanner(System.in);
-        // System.out.println("Ñ¡Ôñ¼ÓÔØÄ£Ê½£ºÇëÊäÈë 0");
-        // System.out.println("Ñ¡Ôñ·ÖÎöÄ£Ê½£ºÇëÊäÈë 1");
+        // System.out.println("é€‰æ‹©åŠ è½½æ¨¡å¼ï¼šè¯·è¾“å…¥ 0");
+        // System.out.println("é€‰æ‹©åˆ†ææ¨¡å¼ï¼šè¯·è¾“å…¥ 1");
         // int in = input.nextInt();
-        // System.out.println("ÊäÈëµÄÊÇ" + in);
+        // System.out.println("è¾“å…¥çš„æ˜¯" + in);
         int in = 0;// test
-        // Ö´ĞĞ
+        // æ‰§è¡Œ
         if (in == 0)
             loadrun(outputDirectory);
         else {
@@ -30,26 +30,26 @@ public class Main {
 
     private static void analysisrun(String inputDirectory, String outputDirectory) throws Exception {
         Manager mgr = new Manager();
-        // Èç¹ûÊÇ·ÖÎöÎÄ¼ş
-        mgr.analyze(); // ·ÖÎöÀà¼ä¹ØÏµ£¬»ñÈ¡Àà¼äÊôĞÔ¸´ÔÓ¶ÈºÍ·½·¨¸´ÔÓ¶È
-        mgr.getCostMatrix(); // ³õÊ¼»¯²âÊÔ´ú¼Û¾ØÕó
-        mgr.initTestPriority(); // ³õÊ¼»¯²âÊÔÊÕÒæ
-        mgr.genCITO(); // Éú³ÉÀà¼¯³É²âÊÔĞòÁĞ
-        mgr.outputResults(); // Êä³ö²âÊÔ½á¹û
-        mgr.outputCost(); // Êä³ö×ÜÌå²âÊÔ´ú¼Û
+        // å¦‚æœæ˜¯åˆ†ææ–‡ä»¶
+        mgr.analyze(); // åˆ†æç±»é—´å…³ç³»ï¼Œè·å–ç±»é—´å±æ€§å¤æ‚åº¦å’Œæ–¹æ³•å¤æ‚åº¦
+        mgr.getCostMatrix(); // åˆå§‹åŒ–æµ‹è¯•ä»£ä»·çŸ©é˜µ
+        mgr.initTestPriority(); // åˆå§‹åŒ–æµ‹è¯•æ”¶ç›Š
+        mgr.genCITO(); // ç”Ÿæˆç±»é›†æˆæµ‹è¯•åºåˆ—
+        mgr.outputResults(); // è¾“å‡ºæµ‹è¯•ç»“æœ
+        mgr.outputCost(); // è¾“å‡ºæ€»ä½“æµ‹è¯•ä»£ä»·
     }
 
     private static void loadrun(String outputDirectory) {
         Manager mgr = new Manager();
-        // Èç¹ûÊÇ¼ÓÔØÎÄ¼ş
-        Log.logNormal("  ¿ªÊ¼Ö´ĞĞLoad");
-        mgr.load(); // ¼ÓÔØÃèÊöÀà¼ä¹ØÏµµÄÎÄ¼ş£¬»ñÈ¡Àà¼äÊôĞÔ¸´ÔÓ¶ÈºÍ·½·¨¸´ÔÓ¶È
-        Log.logNormal("  LoadÖ´ĞĞÍê±Ï");
-        Log.logInfo("  ¼ÓÔØµÄÀàµÄ×ÜÊı   " + mgr.numOfLoadClass());
-        mgr.getCostMatrix(mgr.numOfLoadClass()); // ³õÊ¼»¯²âÊÔ´ú¼Û¾ØÕó
-        mgr.initTestPriority(); // ³õÊ¼»¯²âÊÔÊÕÒæ
-        mgr.genCITO(); // Éú³ÉÀà¼¯³É²âÊÔĞòÁĞ
-        mgr.outputResults(); // Êä³ö²âÊÔ½á¹û
-        mgr.outputCost(); // Êä³ö×ÜÌå²âÊÔ´ú¼Û
+        // å¦‚æœæ˜¯åŠ è½½æ–‡ä»¶
+        Log.logNormal("  å¼€å§‹æ‰§è¡ŒLoad");
+        mgr.load(); // åŠ è½½æè¿°ç±»é—´å…³ç³»çš„æ–‡ä»¶ï¼Œè·å–ç±»é—´å±æ€§å¤æ‚åº¦å’Œæ–¹æ³•å¤æ‚åº¦
+        Log.logNormal("  Loadæ‰§è¡Œå®Œæ¯•");
+        Log.logInfo("  åŠ è½½çš„ç±»çš„æ€»æ•°   " + mgr.numOfLoadClass());
+        mgr.getCostMatrix(mgr.numOfLoadClass()); // åˆå§‹åŒ–æµ‹è¯•ä»£ä»·çŸ©é˜µ
+        mgr.initTestPriority(); // åˆå§‹åŒ–æµ‹è¯•æ”¶ç›Š
+        mgr.genCITO(); // ç”Ÿæˆç±»é›†æˆæµ‹è¯•åºåˆ—
+        mgr.outputResults(); // è¾“å‡ºæµ‹è¯•ç»“æœ
+        mgr.outputCost(); // è¾“å‡ºæ€»ä½“æµ‹è¯•ä»£ä»·
     }
 }

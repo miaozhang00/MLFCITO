@@ -1,11 +1,11 @@
-package rpmechanism;
+ï»¿package rpmechanism;
 
 import java.util.List;
 
 public class TestPriority {
 
-    private int[] testPriority; // ²âÊÔÓÅÏÈ¼¶Êı×é
-    private int num; // ²âÊÔÓÅÏÈ¼¶Êı×é´óĞ¡
+    private int[] testPriority; // æµ‹è¯•ä¼˜å…ˆçº§æ•°ç»„
+    private int num; // æµ‹è¯•ä¼˜å…ˆçº§æ•°ç»„å¤§å°
 
     public TestPriority() {
         num = CostMatrix.getNum();
@@ -36,7 +36,7 @@ public class TestPriority {
         // TODO Auto-generated method stub
         int profit = 0;
         while (num != 0) {
-            System.out.println("²âÊÔÓÅÏÈ¼¶Îª" + (profit + 1));
+            System.out.println("æµ‹è¯•ä¼˜å…ˆçº§ä¸º" + (profit + 1));
             for (int i = 0; i <= num - 1; i++) {
                 if (testPriority[i] == profit) {
                     System.out.print(CostMatrix.getNameByNo(i) + " ");

@@ -1,4 +1,4 @@
-package soot;
+ï»¿package soot;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -29,25 +29,25 @@ public class SootOption {
          * This is opposed to library classes, which Soot does not process but
          * only uses for type resolution. Application classes are usually those
          * explicitly stated on the command line or those classes that reside in
-         * a directory referred to via ¨Cprocess-dir.
+         * a directory referred to via â€“process-dir.
          * 
          * When you use the -app option, however, then Soot also processes all
          * classes referenced by these classes. It will not, however, process
          * any classes in the JDK, i.e. classes in one of the java.* and
          * com.sun.* packages. If you wish to include those too you have to use
-         * the special ¨Ci option, e.g. -i java. See the guide on command line
+         * the special â€“i option, e.g. -i java. See the guide on command line
          * options for this and other command line options.
          * https://github.com/Sable/soot/wiki/Introduction:-Soot-as-a-command-line-tool
          */
 
         // Run in application mode
-        // ¿ªÆôÕâ¸öÑ¡ÏîµÄÒâË¼ÊÇ, ¼ÙÈçprocess_dirÖĞµÄÀàÒÀÀµÓÚÆäËûµÄÀà,
-        // ÄÇÃ´sootÒ²»áÊÔÍ¼È¥·ÖÎöÆäËûµÄÀà, ³ı·ÇÕâ¸öÀàÕÒ²»µ½(»á±¨: Warning: *** is a phantom class!)
+        // å¼€å¯è¿™ä¸ªé€‰é¡¹çš„æ„æ€æ˜¯, å‡å¦‚process_dirä¸­çš„ç±»ä¾èµ–äºå…¶ä»–çš„ç±»,
+        // é‚£ä¹ˆsootä¹Ÿä¼šè¯•å›¾å»åˆ†æå…¶ä»–çš„ç±», é™¤éè¿™ä¸ªç±»æ‰¾ä¸åˆ°(ä¼šæŠ¥: Warning: *** is a phantom class!)
         Options.v().set_app(true);
 
         // Run in whole-program mode
-        // ¿ªÆôÕâ¸öÑ¡ÏîµÄÒâË¼ÊÇ: process_dirÖĞµÄËùÓĞÀàÊÇÒ»¸ö¶ÀÁ¢µÄÍêÕûµÄ³ÌĞò,
-        // ¿ÉÒÔÖ±½ÓÔËĞĞµÄ, »»¾ä»°Ëµ, process_dirÖĞÖÁÉÙÓĞÒ»¸öÀà°üº¬main·½·¨, ¿ÉÒÔ¶ÀÁ¢ÔËĞĞÆğÀ´
+        // å¼€å¯è¿™ä¸ªé€‰é¡¹çš„æ„æ€æ˜¯: process_dirä¸­çš„æ‰€æœ‰ç±»æ˜¯ä¸€ä¸ªç‹¬ç«‹çš„å®Œæ•´çš„ç¨‹åº,
+        // å¯ä»¥ç›´æ¥è¿è¡Œçš„, æ¢å¥è¯è¯´, process_dirä¸­è‡³å°‘æœ‰ä¸€ä¸ªç±»åŒ…å«mainæ–¹æ³•, å¯ä»¥ç‹¬ç«‹è¿è¡Œèµ·æ¥
         Options.v().set_whole_program(true);
 
         // Remember the line number
@@ -61,15 +61,15 @@ public class SootOption {
         Options.v().set_process_dir(processdir);
 
         // Enable jimble transform
-        // ÖÁÉÙ¿ªÆôÒ»ÖÖ×ª»», ³£ÓÃÊÇjb
+        // è‡³å°‘å¼€å¯ä¸€ç§è½¬æ¢, å¸¸ç”¨æ˜¯jb
         Options.v().setPhaseOption("jb", "enabled:true");
 
         // Enable jimble to remember the original name
-        // jimble·ÖÎöÀà, Èç¹û²»¿ªÕâ¸öÑ¡Ïî, ÎŞ·¨¼Ç×¡±äÁ¿Ãû, ·ÖÎö³öÀ´µÄ½á¹û±äÁ¿Ãû³Æ¶¼ÊÇi1, i2, i3Ö®ÀàµÄ
+        // jimbleåˆ†æç±», å¦‚æœä¸å¼€è¿™ä¸ªé€‰é¡¹, æ— æ³•è®°ä½å˜é‡å, åˆ†æå‡ºæ¥çš„ç»“æœå˜é‡åç§°éƒ½æ˜¯i1, i2, i3ä¹‹ç±»çš„
         Options.v().setPhaseOption("jb", "use-original-names:true");
 
         // Use path as the classpath for finding classes.
-        // Õâ¸öÑ¡ÏîÖ÷ÒªÊÇÍ¨Öªsoot javaµÄÏµÍ³ÀàÔÚÄÄ¸öÎ»ÖÃ, ËùÒÔÖ»ÉèÖÃjavaÏµÍ³µÄ»·¾³±äÁ¿¾Í¿ÉÒÔ, ²»ÓÃÉèÖÃinputÎÄ¼ş¼Ğ
+        // è¿™ä¸ªé€‰é¡¹ä¸»è¦æ˜¯é€šçŸ¥soot javaçš„ç³»ç»Ÿç±»åœ¨å“ªä¸ªä½ç½®, æ‰€ä»¥åªè®¾ç½®javaç³»ç»Ÿçš„ç¯å¢ƒå˜é‡å°±å¯ä»¥, ä¸ç”¨è®¾ç½®inputæ–‡ä»¶å¤¹
         Options.v().set_soot_classpath(CLASS_PATH);
     }
 }

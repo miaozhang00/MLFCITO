@@ -1,4 +1,4 @@
-package rpmechanism;
+ï»¿package rpmechanism;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,12 +7,12 @@ import multilevelfeedback.ClassInfo;
 
 public class TestProfit {
 
-    static private double[] listOfProfit; // ²âÊÔÊÕÒæÊı×é£»
-    static private double[] listOfCost; // ²âÊÔ³É±¾Êı×é£»
-    private int num; // ´ı²âÏµÍ³µÄÀàµÄÊıÄ¿£¬Êı×é´óĞ¡
-    private double maxprofit; // ×î´ó²âÊÔÊÕÒæ
-    private double sumOfCost; // ×ÜµÄ²âÊÔ³É±¾
-    static private boolean[] orderedClass; // ÒÑÅÅĞòÍê³ÉµÄÀà
+    static private double[] listOfProfit; // æµ‹è¯•æ”¶ç›Šæ•°ç»„ï¼›
+    static private double[] listOfCost; // æµ‹è¯•æˆæœ¬æ•°ç»„ï¼›
+    private int num; // å¾…æµ‹ç³»ç»Ÿçš„ç±»çš„æ•°ç›®ï¼Œæ•°ç»„å¤§å°
+    private double maxprofit; // æœ€å¤§æµ‹è¯•æ”¶ç›Š
+    private double sumOfCost; // æ€»çš„æµ‹è¯•æˆæœ¬
+    static private boolean[] orderedClass; // å·²æ’åºå®Œæˆçš„ç±»
 
     public TestProfit() {
         num = CostMatrix.getNum();
@@ -26,8 +26,8 @@ public class TestProfit {
     }
 
     public void calProfit(List<String> lastOrderedClass) {
-        // Èç¹ûÉÏ´Î²âÊÔµÄÀàÎª¿Õ£¬±íÃ÷ÊÇµÚÒ»´Î²âÊÔ£¬ĞèÒª¼ÆËã²âÊÔÊÕÒæ¡¢²âÊÔ³É±¾
-        // ·ñÔò£¬¸ù¾İÉÏ´Î²âÊÔµÄÀà£¬¶Ô²âÊÔÊÕÒæºÍ²âÊÔ³É±¾½øĞĞ¶¯Ì¬µ÷Õû
+        // å¦‚æœä¸Šæ¬¡æµ‹è¯•çš„ç±»ä¸ºç©ºï¼Œè¡¨æ˜æ˜¯ç¬¬ä¸€æ¬¡æµ‹è¯•ï¼Œéœ€è¦è®¡ç®—æµ‹è¯•æ”¶ç›Šã€æµ‹è¯•æˆæœ¬
+        // å¦åˆ™ï¼Œæ ¹æ®ä¸Šæ¬¡æµ‹è¯•çš„ç±»ï¼Œå¯¹æµ‹è¯•æ”¶ç›Šå’Œæµ‹è¯•æˆæœ¬è¿›è¡ŒåŠ¨æ€è°ƒæ•´
         if (lastOrderedClass.size() == 0)
             calProfitandCost();
         else
@@ -35,7 +35,7 @@ public class TestProfit {
     }
 
     private void updateProfitandCost(List<String> lastOrderedClass) {
-        // ¸ù¾İÉÏ´Î²âÊÔµÄÀà£¬¶Ô²âÊÔÊÕÒæºÍ²âÊÔ³É±¾½øĞĞ¶¯Ì¬µ÷Õû
+        // æ ¹æ®ä¸Šæ¬¡æµ‹è¯•çš„ç±»ï¼Œå¯¹æµ‹è¯•æ”¶ç›Šå’Œæµ‹è¯•æˆæœ¬è¿›è¡ŒåŠ¨æ€è°ƒæ•´
         for (int i = 0; i <= num - 1; i++) {
             ClassInfo candidate = CostMatrix.getCIByNo(i);
             if (orderedClass[i] == false) {
@@ -55,7 +55,7 @@ public class TestProfit {
     }
 
     private void calProfitandCost() {
-        // ³õÊ¼Ê±£¬¼ÆËã²âÊÔÊÕÒæºÍ²âÊÔ³É±¾
+        // åˆå§‹æ—¶ï¼Œè®¡ç®—æµ‹è¯•æ”¶ç›Šå’Œæµ‹è¯•æˆæœ¬
         for (int i = 0; i <= num - 1; i++) {
             for (int j = 0; j <= num - 1 && j != i; j++) {
                 listOfCost[i] = CostMatrix.getCostMatrix()[i][j];
@@ -64,7 +64,7 @@ public class TestProfit {
         }
     }
 
-    // »ñÈ¡²âÊÔÊÕÒæ×î´óµÄÀà
+    // è·å–æµ‹è¯•æ”¶ç›Šæœ€å¤§çš„ç±»
     public String getMaxProfit() {
         double maxp = 0.0;
         int cursor = 0;
@@ -86,7 +86,7 @@ public class TestProfit {
         return maxProfitClass;
     }
 
-    // »ñÈ¡²âÊÔ³É±¾Îª0µÄÀà
+    // è·å–æµ‹è¯•æˆæœ¬ä¸º0çš„ç±»
     public List<String> getZeroCost() {
         List<String> listOfZeroCostClass = new ArrayList<String>();
         for (int i = 1; i <= num - 1; i++) {
